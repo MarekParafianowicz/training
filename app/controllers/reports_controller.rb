@@ -2,8 +2,7 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy, :publish]
 
   def publish
-    sleep 2
-    @report.update_attribute(:published_at, Time.zone.now)
+    @report.publish
     redirect_to root_url, notice: 'Report was published'
   end
 
