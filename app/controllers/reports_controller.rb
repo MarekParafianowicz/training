@@ -25,6 +25,7 @@ class ReportsController < ApplicationController
   # POST /reports.json
   def create
     @report = Report.new(report_params)
+    sleep 10
 
     respond_to do |format|
       if @report.save
