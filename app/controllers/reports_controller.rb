@@ -33,6 +33,7 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.save
+        sleep_time(10)
         format.html { redirect_to @report, notice: 'Report was successfully created.' }
         format.json { render :show, status: :created, location: @report }
       else
@@ -77,5 +78,9 @@ class ReportsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
       params.require(:report).permit(:title, :content)
+    end
+
+    def sleep_time(time)
+      sleep(time)
     end
 end
