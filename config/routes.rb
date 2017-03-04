@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'reports#new'
+  root 'reports#index'
+  put 'reports/:id' => 'reports#publish'
   resources :reports
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

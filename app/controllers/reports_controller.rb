@@ -1,5 +1,11 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:show, :edit, :update, :destroy]
+  before_action :set_report, only: [:show, :edit, :update, :destroy, :publish]
+
+  def publish
+    sleep 2
+    @report.update_attribute(:published_at, Time.zone.now)
+    redirect_to root_url, notice: 'Report was published'
+  end
 
   # GET /reports
   # GET /reports.json
@@ -25,7 +31,6 @@ class ReportsController < ApplicationController
   # POST /reports.json
   def create
     @report = Report.new(report_params)
-    sleep 10
 
     respond_to do |format|
       if @report.save
@@ -67,6 +72,8 @@ class ReportsController < ApplicationController
     def set_report
       @report = Report.find(params[:id])
     end
+
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
