@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => "/sidekiq"
+
   root 'reports#index'
   put 'reports/:id' => 'reports#publish'
   resources :reports

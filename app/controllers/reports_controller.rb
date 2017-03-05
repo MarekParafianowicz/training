@@ -2,8 +2,8 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy, :publish]
 
   def publish
-    @report.publish
-    redirect_to root_url, notice: 'Report was published'
+    PublisherWorker.perform_async(params[:id])
+    redirect_to root_url, notice: 'Publishing report'
   end
 
   # GET /reports
