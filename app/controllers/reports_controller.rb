@@ -2,7 +2,7 @@ class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy, :publish]
 
   def publish
-    @report.publish
+    Resque.enqueue(Publisher, params[:id])
     redirect_to root_url, notice: 'Report was published'
   end
 
